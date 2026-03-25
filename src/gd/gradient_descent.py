@@ -88,6 +88,10 @@ class GradientDescent:
 
             result.record(x, f_val, g, lr)
 
+            if not np.isfinite(f_val):
+                result.finalize(converged=False, stop_reason="diverged (f became inf/nan)")
+                return result
+
             stop, reason = self.stopping.check(i, x, f_val, g, f_prev)
             if stop:
                 result.finalize(
