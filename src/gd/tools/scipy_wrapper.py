@@ -6,11 +6,11 @@ from src.gd.db.history import OptimizationResult
 
 
 def scipy_minimize(
-    func: Callable[[NDArray], float],
-    grad: Callable[[NDArray], NDArray],
-    x0: NDArray,
-    method: str = "CG",
-    **kwargs,
+        func: Callable[[NDArray], float],
+        grad: Callable[[NDArray], NDArray],
+        x0: NDArray,
+        method: str = "CG",
+        **kwargs,
 ) -> OptimizationResult:
     """
     Wrapper around scipy.optimize.minimize that records full trajectory.

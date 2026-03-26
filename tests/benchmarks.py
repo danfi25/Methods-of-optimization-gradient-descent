@@ -203,20 +203,3 @@ def condition_number(func: Callable, x: NDArray) -> float:
     if len(eigvals) == 0:
         return np.inf
     return float(np.max(np.abs(eigvals)) / np.min(np.abs(eigvals)))
-
-
-def make_counted(
-    func: Callable, grad: Callable
-) -> tuple[Callable, Callable, dict[str, int]]:
-    # wrapper that counts function and gradient evaluations
-    counters = {"func": 0, "grad": 0}
-
-    def counted_func(x):
-        counters["func"] += 1
-        return func(x)
-
-    def counted_grad(x):
-        counters["grad"] += 1
-        return grad(x)
-
-    return counted_func, counted_grad, counters

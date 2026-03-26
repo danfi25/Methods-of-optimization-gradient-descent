@@ -98,7 +98,11 @@ class Visualizer:
         ax.set_xlabel("x")
         ax.set_ylabel("y")
         ax.set_title(f"{self.title} — Optimization Trajectories")
-        ax.legend(fontsize=8)
+
+        handles, labels = ax.get_legend_handles_labels()
+        if handles:
+            ax.legend(fontsize=8)
+
         fig.tight_layout()
         return fig
 
@@ -133,7 +137,11 @@ class Visualizer:
         ax.set_ylabel("y")
         ax.set_zlabel("f(x, y)")
         ax.set_title(f"{self.title} — 3D Trajectories")
-        ax.legend(fontsize=8)
+
+        handles, labels = ax.get_legend_handles_labels()
+        if handles:
+            ax.legend(fontsize=8)
+
         fig.tight_layout()
         return fig
 
@@ -176,7 +184,11 @@ class Visualizer:
         ax.set_xlabel("Iteration")
         ax.set_ylabel(ylabel_map.get(metric, metric))
         ax.set_title(title or f"Convergence — {ylabel_map.get(metric, metric)}")
-        ax.legend(fontsize=8)
+
+        handles, labels = ax.get_legend_handles_labels()
+        if handles:
+            ax.legend(fontsize=8)
+
         ax.grid(True, alpha=0.3)
         fig.tight_layout()
         return fig

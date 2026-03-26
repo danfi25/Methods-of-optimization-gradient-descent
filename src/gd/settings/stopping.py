@@ -8,7 +8,7 @@ class StoppingCriteria(Protocol):
     # returns(should_stop, reason)
 
     def check(
-        self, iteration: int, x: NDArray, f: float, grad: NDArray, f_prev: float | None
+            self, iteration: int, x: NDArray, f: float, grad: NDArray, f_prev: float | None
     ) -> tuple[bool, str]: ...
 
 

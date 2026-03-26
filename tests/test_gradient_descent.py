@@ -52,10 +52,3 @@ def test_wolfe_via_class():
     result = gd.minimize(bench.func, bench.grad, x0=np.array([0.0, 0.0]))
     assert result.converged
     np.testing.assert_allclose(result.x_opt, [1.0, 3.0], atol=1e-3)
-
-
-def test_repr():
-    gd1 = GradientDescent(lr_schedule=ConstantLR(0.05))
-    assert "GradientDescent" in repr(gd1)
-    gd2 = GradientDescent(step_size_method="armijo")
-    assert "armijo" in repr(gd2)

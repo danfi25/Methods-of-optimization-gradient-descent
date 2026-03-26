@@ -10,7 +10,6 @@ from src.gd.settings.stopping import StoppingCriteria, CombinedStopping, Gradien
 
 
 class GradientDescent:
-
     """
     configurable gradient descent
 
@@ -29,13 +28,14 @@ class GradientDescent:
         Extra arguments forwarded to the line search
         (c1, c2, rho, alpha_init)
     """
+
     def __init__(
-        self,
-        lr_schedule: LRSchedule | None = None,
-        step_size_method: Literal["fixed", "armijo", "wolfe"] = "fixed",
-        stopping: StoppingCriteria | None = None,
-        max_iter: int = 10000,
-        **ls_kwargs,
+            self,
+            lr_schedule: LRSchedule | None = None,
+            step_size_method: Literal["fixed", "armijo", "wolfe"] = "fixed",
+            stopping: StoppingCriteria | None = None,
+            max_iter: int = 10000,
+            **ls_kwargs,
     ):
         self.lr_schedule = lr_schedule or ConstantLR(0.01)
         self.step_size_method = step_size_method
@@ -48,22 +48,21 @@ class GradientDescent:
             self.stopping = CombinedStopping([GradientNorm(1e-6)], max_iter=max_iter)
 
     def minimize(
-        self,
-        func: Callable[[NDArray], float],
-        grad: Callable[[NDArray], NDArray],
-        x0: NDArray,
+            self,
+            func: Callable[[NDArray], float],
+            grad: Callable[[NDArray], NDArray],
+            x0: NDArray,
     ) -> OptimizationResult:
         # run gradient descent and returns full optimization history
         if self.step_size_method == "fixed":
             return self._run_fixed(func, grad, x0)
         return self._run_line_search(func, grad, x0)
 
-
     def _run_fixed(
-        self,
-        func: Callable[[NDArray], float],
-        grad: Callable[[NDArray], NDArray],
-        x0: NDArray,
+            self,
+            func: Callable[[NDArray], float],
+            grad: Callable[[NDArray], NDArray],
+            x0: NDArray,
     ) -> OptimizationResult:
         result = OptimizationResult()
         x = np.array(x0, dtype=np.float64)
@@ -104,10 +103,10 @@ class GradientDescent:
         return result
 
     def _run_line_search(
-        self,
-        func: Callable[[NDArray], float],
-        grad: Callable[[NDArray], NDArray],
-        x0: NDArray,
+            self,
+            func: Callable[[NDArray], float],
+            grad: Callable[[NDArray], NDArray],
+            x0: NDArray,
     ) -> OptimizationResult:
         result = OptimizationResult()
         x = np.array(x0, dtype=np.float64)
